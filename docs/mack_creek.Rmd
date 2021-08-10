@@ -39,13 +39,31 @@ mc_salamanders <- mack_verts %>% dplyr::filter(species == "DITE")
 Scatterplot
 
 ```{r}
-ggplot(data = mc_salamanders, aes(x = weight, y = length1)) + 
-  geom_point() + 
+salamander_size_plot <- ggplot(data = mc_salamanders, aes(x = weight, y = length1)) + 
+  geom_point(color = "orange", alpha = 0.5, size = .8) + 
   labs(x = "weight (g)", 
        y = "snout-vent length (mm)", 
-       title = "Mack Creek Pacific Giant Salamanders", 
+       title = "Mack Creek Pacific Giant Salamanders (Dicamptodon tenebrosus)", 
        subtitle = "Data from EDI Data Portal",
        caption = "Gregory, S.V. and I. Arismendi. 2020. Aquatic Vertebrate Population Study in Mack Creek, \n Andrews Experimental Forest, 1987 to present ver 14. Environmental Data Initiative. \n https://doi.org/10.6073/pasta/7c78d662e847cdbe33584add8f809165 (Accessed 2021-08-10).")
+
+ggsave(here("figs", "salamander_size.png"), plot = salamander_size_plot, height = 6, width = 8)
+```
+
+```{r}
+mc_trout <- mack_verts %>% dplyr::filter(species == "ONCL")
+
+trout_plot <- ggplot(data = mc_trout, aes(x = weight, y = length1)) + 
+  geom_point(aes(color = reach), alpha = 0.5, size = .8) + 
+  scale_color_manual(values = c("green", "blue", "purple")) +
+  labs(x = "weight (g)", 
+       y = "total length (mm)", 
+       title = "Mack Creek Cutthroat Trout (Rhyacotriton olympicus)", 
+       subtitle = "Data from EDI Data Portal",
+       caption = "Gregory, S.V. and I. Arismendi. 2020. Aquatic Vertebrate Population Study in Mack Creek, \n Andrews Experimental Forest, 1987 to present ver 14. Environmental Data Initiative. \n https://doi.org/10.6073/pasta/7c78d662e847cdbe33584add8f809165 (Accessed 2021-08-10).") +
+  facet_wrap(~reach)
+
+ggsave(here("figs", "cutthroat_size.png"), plot = trout_plot, height = 6, width = 8)
 ```
 
 
