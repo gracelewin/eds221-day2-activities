@@ -1,0 +1,53 @@
+---
+title: "Untitled"
+author: "Grace Lewin"
+date: "8/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(janitor)
+library(here)
+```
+
+
+
+```{r}
+mack_verts <- read_csv(here("data", "AS00601.csv"))
+
+mack_verts <- mack_verts %>% clean_names()
+```
+
+```{r}
+mc_wt_5 <- mack_verts$weight[5]
+mc_wt_5
+
+mc_length_8_20 <- mack_verts$length1[8:20]
+mc_length_8_20
+
+mc_dates <- mack_verts$sampledate
+```
+
+Salamander Subset
+
+```{r}
+mc_salamanders <- mack_verts %>% dplyr::filter(species == "DITE")
+```
+
+Scatterplot
+
+```{r}
+ggplot(data = mc_salamanders, aes(x = weight, y = length1)) + 
+  geom_point() + 
+  labs(x = "weight (g)", 
+       y = "snout-vent length (mm)", 
+       title = "Mack Creek Pacific Giant Salamanders", 
+       subtitle = "Data from EDI Data Portal",
+       caption = "Gregory, S.V. and I. Arismendi. 2020. Aquatic Vertebrate Population Study in Mack Creek, \n Andrews Experimental Forest, 1987 to present ver 14. Environmental Data Initiative. \n https://doi.org/10.6073/pasta/7c78d662e847cdbe33584add8f809165 (Accessed 2021-08-10).")
+```
+
+
+
+
