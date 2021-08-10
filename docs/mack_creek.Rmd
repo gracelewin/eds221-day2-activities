@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Aquatic Vertebrate Population Study in Mack Creek"
 author: "Grace Lewin"
 date: "8/10/2021"
 output: html_document
@@ -48,6 +48,8 @@ salamander_size_plot <- ggplot(data = mc_salamanders, aes(x = weight, y = length
        caption = "Gregory, S.V. and I. Arismendi. 2020. Aquatic Vertebrate Population Study in Mack Creek, \n Andrews Experimental Forest, 1987 to present ver 14. Environmental Data Initiative. \n https://doi.org/10.6073/pasta/7c78d662e847cdbe33584add8f809165 (Accessed 2021-08-10).")
 
 ggsave(here("figs", "salamander_size.png"), plot = salamander_size_plot, height = 6, width = 8)
+
+salamander_size_plot
 ```
 
 ```{r}
@@ -64,7 +66,11 @@ trout_plot <- ggplot(data = mc_trout, aes(x = weight, y = length1)) +
   facet_wrap(~reach)
 
 ggsave(here("figs", "cutthroat_size.png"), plot = trout_plot, height = 6, width = 8)
+
+trout_plot
 ```
+
+
 
 
 
